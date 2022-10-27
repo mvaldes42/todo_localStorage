@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Form() {
+export default function Form(props: any) {
   const [value, setValue] = useState<string | null>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +19,7 @@ export default function Form() {
     }
     createdList.push(value);
     localStorage.setItem("todoListKey", JSON.stringify(createdList));
+    props.setNeedsUpdate(true);
   };
 
   return (
