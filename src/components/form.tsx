@@ -14,12 +14,22 @@ export default function Form() {
   };
 
   const createTask = () => {
+    const retrievedDoneListString = localStorage.getItem("doneTodoListKey");
     const retrievedListString = localStorage.getItem("todoListKey");
+    var doneList = [];
     var createdList = [];
     if (retrievedListString !== null) {
       createdList = JSON.parse(retrievedListString);
     }
-    if (value !== "" && !createdList.includes(value)) createdList.push(value);
+    if (retrievedDoneListString !== null) {
+      doneList = JSON.parse(retrievedDoneListString);
+    }
+    if (value === "") alert("Entry is empty!");
+    else if (createdList.includes(value))
+      alert("Task <" + value + "> already exists");
+    else if (doneList.includes(value))
+      alert("Task <" + value + "> is already done!");
+    else createdList.push(value);
     localStorage.setItem("todoListKey", JSON.stringify(createdList));
     update.setNeedsUpdate(true);
   };
