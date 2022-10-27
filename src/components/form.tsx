@@ -17,7 +17,9 @@ export default function Form(props: any) {
     if (retrievedListString !== null) {
       createdList = JSON.parse(retrievedListString);
     }
-    createdList.push(value);
+    console.log("createdList.length", createdList.length);
+    console.log("other", new Set(createdList).size);
+    if (value !== "" && !createdList.includes(value)) createdList.push(value);
     localStorage.setItem("todoListKey", JSON.stringify(createdList));
     props.setNeedsUpdate(true);
   };
