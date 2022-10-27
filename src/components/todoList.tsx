@@ -1,23 +1,32 @@
-import { useEffect, useState } from "react";
-import { TodoRow } from "./todoRow";
+import { useContext, useEffect, useState } from "react";
+import UpdateCxt from "../contex/UpdateCxt";
+import TodoRow from "./todoRow";
 
 export default function TodoList(props: any) {
+  const update = useContext(UpdateCxt);
+
   const [taskList, setTaskList] = useState([]);
+  const [doneList, setDoneList] = useState([]);
 
   useEffect(() => {
-    console.log("needsUpdate", props.needsUpdate);
     const retrievedListString = localStorage.getItem("todoListKey");
-    if (retrievedListString !== null && props.needsUpdate === true) {
+    if (retrievedListString !== null) {
       setTaskList(JSON.parse(retrievedListString));
-      props.setNeedsUpdate(false);
+      update.setNeedsUpdate(false);
     }
-  }, [props.needsUpdate]);
+  }, [update.needsUpdate]);
 
   return (
     <div>
       {taskList?.length !== 0 ? (
         taskList!.map((contents, index) => {
-          return <TodoRow contents={contents} key={index} />;
+          return (
+            <TodoRow
+              contents={contents}
+              key={index}
+              setDoneList={setDoneList}
+            />
+          );
         })
       ) : (
         <span>No entries.</span>

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UpdateCxt from "../contex/UpdateCxt";
 
-export default function Form(props: any) {
+export default function Form() {
+  const update = useContext(UpdateCxt);
   const [value, setValue] = useState<string | null>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,11 +19,9 @@ export default function Form(props: any) {
     if (retrievedListString !== null) {
       createdList = JSON.parse(retrievedListString);
     }
-    console.log("createdList.length", createdList.length);
-    console.log("other", new Set(createdList).size);
     if (value !== "" && !createdList.includes(value)) createdList.push(value);
     localStorage.setItem("todoListKey", JSON.stringify(createdList));
-    props.setNeedsUpdate(true);
+    update.setNeedsUpdate(true);
   };
 
   return (
