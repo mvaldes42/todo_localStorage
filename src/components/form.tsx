@@ -7,8 +7,18 @@ export default function Form() {
     setValue(event.target.value);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    alert("A name was submitted: " + value);
     event.preventDefault();
+    createTask();
+  };
+
+  const createTask = () => {
+    const retrievedListString = localStorage.getItem("todoListKey");
+    var createdList = [];
+    if (retrievedListString !== null) {
+      createdList = JSON.parse(retrievedListString);
+    }
+    createdList.push(value);
+    localStorage.setItem("todoListKey", JSON.stringify(createdList));
   };
 
   return (
