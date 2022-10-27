@@ -31,6 +31,10 @@ export default function Form() {
       alert("Task <" + value + "> is already done!");
     else createdList.push(value);
     localStorage.setItem("todoListKey", JSON.stringify(createdList));
+    localStorage.setItem(
+      "todoListNumberKey",
+      JSON.stringify(createdList.length)
+    );
     update.setNeedsUpdate(true);
   };
 

@@ -28,6 +28,10 @@ export default function TodoRow(props: any) {
     }
     createdList.splice(createdList.indexOf(props.contents), 1);
     localStorage.setItem("todoListKey", JSON.stringify(createdList));
+    localStorage.setItem(
+      "todoListNumberKey",
+      JSON.stringify(createdList.length)
+    );
   };
 
   return (

@@ -29,7 +29,7 @@ export default function TodoList(props: any) {
           );
         })
       ) : (
-        <span>No entries.</span>
+        <span>Add new tasks!</span>
       )}
     </div>
   );
