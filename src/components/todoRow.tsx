@@ -36,7 +36,9 @@ export default function TodoRow(props: any) {
 
   return (
     <div>
-      <input type="checkbox" onChange={handleChange} />
+      {props.currentView === "Completed" ? null : (
+        <input type="checkbox" onChange={handleChange} />
+      )}
       {props.contents}
     </div>
   );

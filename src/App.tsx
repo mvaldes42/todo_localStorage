@@ -8,14 +8,16 @@ import UpdateCxt from "./contex/UpdateCxt";
 function App() {
   const [needsUpdate, setNeedsUpdate] = useState<boolean | null>(false);
 
+  const [currentView, setCurrentView] = useState("Active");
+
   return (
     <div className="App">
       <h1 className="title">To Do List</h1>
       <div>
         <UpdateCxt.Provider value={{ needsUpdate, setNeedsUpdate }}>
           <Form />
-          <TodoList />
-          <TodoFooter />
+          <TodoList currentView={currentView} />
+          <TodoFooter setCurrentView={setCurrentView} />
         </UpdateCxt.Provider>
       </div>
     </div>
